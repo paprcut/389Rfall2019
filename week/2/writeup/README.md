@@ -1,18 +1,44 @@
 # Writeup 2 - OSINT
 
-Name: *PUT YOUR NAME HERE*
-Section: *PUT YOUR SECTION NUMBER HERE*
+Name: *Wyeth Force*
+Section: *Section 0101*
 
 I pledge on my honor that I have not given or received any unauthorized assistance on this assignment or examination.
 
-Digital acknowledgement: *PUT YOUR NAME HERE*
+Digital acknowledgement: *Wyeth Force*
 
 ## Assignment Writeup
 
 ### Part 1 (45 pts)
 
-*Please use this space to writeup your answers and solutions (and how you found them!) for part 1.*
+*1.  I determined that ejnorman84's real name is Eric Norman.  I found this on his instagram account, which I discovered via methods discussed in question 3.
+ 
+2.  Eric works for a power and energy company called Wattsamp Energy.  Their website url is wattsamp.net
+
+3.  The first thing I did was locate Eric's Reddit and Instagram accounts, both of which were under the given username ejnorman84.  I found these social media accounts using username
+finding tools that I got from osintframework.com.  His Reddit account seemed to indicate that he lived in Texas, and his instagram account informed we where he worked.  I believe I was
+able to determine his address from running 'whois' on his companies website via Kali terminal, which gave me the address 1300 Adabel Drive, El Paso, TX 79835.  'whois' also informed me
+that Eric's email address is ejnorman84@gmail.com, and that his phone number is 202-656-2837.
+
+4.  I only found 1 IP address, which was the one associated with his company's website.  The address is 157.230.179.99.  DNS tools like dnstrails and dnsdumpster didn't yield any new
+information besides a bonus flag, which I list in part 1.9.  I determined the IP address using 'whois'.
+
+5.  Unfortunately I was unable to find any hidden files or directories on the wattsamp.net website.
+
+6.  I used nmap to find open ports on the website.  I determined that ports 22 and 80 were both open and running ssh and http respectively, but these were not the relevent open ports.  With 
+TA assistance I was able to find another open port, number 1337.  I was unable to determine what service was running behind it, only that it was unfiltered.
+
+7.  I determined that the web server is running Ubuntu with Apache.  This was determined using an online tool I found at browserSPY.dk.
+
+8.  Yes, I found 4 bonus flags.  The first bonus flag I found was on one of Eric Norman's instagram posts, in the bottom of the frame.  It's text was \*CMSC389R-{Looking_Closely_Pays}.
+The next flag I found was in the 'inspect element' of the wattsamp.net homepage, the text being \*CMSC389R-{html_h@x0r_lulz}.  The third bonus flag I found was in the wattsamp.net's
+robots.txt file, which read \*CMSC389R-{n0_indexing_pls}.  The fourth and final bonus flag I found was via dnsdumpster, which revealed \*CMSC389R-{Do_you_N0T_See_this} in TXT records for 
+wattsamp.net.  I apologize I couldn't figure out how to attach screenshots of the flags, I hope to do so for future assignments as I get the hang of MarkDown.*
 
 ### Part 2 (75 pts)
 
-*Please use this space to detail your approach and solutions for part 2. Don't forget to upload your completed source code to this /writeup directory as well!*
+*I was eventually able to get my python script to work for this situation, but it was admittedly slow.  I guessed correctly from my OSINT that the username was ejnorman84, and with my 
+slowmoving stub.py script I eventually found that the password was 'hello1'.  My stub.py file should be in my writeup directory on GitHub.  Big thanks to the TA's for help with the script. 
+
+Unfortunately, the server is currently down, so at this point in time I am unable to look for the final flag.  I just wanted to submit everything I have so far.  I will hopefully submit 
+the final flag tomorrow.*

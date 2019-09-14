@@ -11,7 +11,7 @@ Digital acknowledgement: *Wyeth Force*
 
 ### Part 1 (45 pts)
 
-*1.  I determined that ejnorman84's real name is Eric Norman.  I found this on his instagram account, which I discovered via methods discussed in question 3.
+1.  I determined that ejnorman84's real name is Eric Norman.  I found this on his instagram account, which I discovered via methods discussed in question 3.
  
 2.  Eric works for a power and energy company called Wattsamp Energy.  Their website url is wattsamp.net
 
@@ -33,12 +33,21 @@ TA assistance I was able to find another open port, number 1337.  I was unable t
 8.  Yes, I found 4 bonus flags.  The first bonus flag I found was on one of Eric Norman's instagram posts, in the bottom of the frame.  It's text was \*CMSC389R-{Looking_Closely_Pays}.
 The next flag I found was in the 'inspect element' of the wattsamp.net homepage, the text being \*CMSC389R-{html_h@x0r_lulz}.  The third bonus flag I found was in the wattsamp.net's
 robots.txt file, which read \*CMSC389R-{n0_indexing_pls}.  The fourth and final bonus flag I found was via dnsdumpster, which revealed \*CMSC389R-{Do_you_N0T_See_this} in TXT records for 
-wattsamp.net.  I apologize I couldn't figure out how to attach screenshots of the flags, I hope to do so for future assignments as I get the hang of MarkDown.*
+wattsamp.net.  I apologize I couldn't figure out how to attach screenshots of the flags, I hope to do so for future assignments as I get the hang of MarkDown.
 
 ### Part 2 (75 pts)
 
-*I was eventually able to get my python script to work for this situation, but it was admittedly slow.  I guessed correctly from my OSINT that the username was ejnorman84, and with my 
+I was eventually able to get my python script to work for this situation, but it was admittedly slow.  I guessed correctly from my OSINT that the username was ejnorman84, and with my 
 slowmoving stub.py script I eventually found that the password was 'hello1'.  My stub.py file should be in my writeup directory on GitHub.  Big thanks to the TA's for help with the script. 
 
+The main thought process behind my script was as follows.  Per the TA suggestions, the majority of my script was a big 'for' loop that connected to the server via a socket, then received
+whatever the server was sending/asking for, which was the captcha to start.  I processed the captcha line and performed whatever operations were necessary, then sent back the answer via
+the socket.  I then entered the username and the first line from the password wordlist.  If this entry failed, I moved back to the beginning of the loop and iterated one line down the 
+password wordlist.  This would continue until I found a successful password, which in this case was 'hello1'.
+
+The biggest problem I faced with the script was that it took so long.  I had to execute numerous time.sleep(1) calls, which made it so that iterating through a single password took about
+10 seconds.  Considering that the wordlist was over a million elements, this was definitely the problem.  If the correct password hadn't been very early in the file I would have been in 
+big trouble.  A possible solution to this issue may have been multi-threading, but fortunately I didn't have to explore any alternatives.
+
 Unfortunately, the server is currently down, so at this point in time I am unable to look for the final flag.  I just wanted to submit everything I have so far.  I will hopefully submit 
-the final flag tomorrow.*
+the final flag tomorrow.

